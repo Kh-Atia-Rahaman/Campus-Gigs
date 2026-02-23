@@ -1,0 +1,193 @@
+<?php
+// Include database connection
+include('../../backend/db_connection.php');
+
+// Fetch jobs from the database
+$sql = "SELECT * FROM jobs ORDER BY created_at DESC";
+$result = $conn->query($sql);
+
+// Job posting handling
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $category = $_POST['category'];
+    $budget = $_POST['budget'];
+    $deadline = $_POST['deadline'];
+    $time = $_POST['time'];
+    $description = $_POST['description'];
+
+    // Insert new job into the database
+    $stmt = $conn->prepare("INSERT INTO jobs (category, budget, deadline, time, description) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sdsss", $category, $budget, $deadline, $time, $description);
+    $stmt->execute();
+    $stmt->close();
+
+    // Redirect to the same page to refresh the job feed
+    header("Location: ../../backend/job_feed.php");
+    exit();
+}
+
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Feed - CampusGigs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #003366, #0056b3);
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: white !important;
+            font-size: 1.1rem;
+        }
+
+        .job-feed-container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-card {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .btn-apply {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: 6px;
+        }
+
+        .post-job-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="Home Page.html">CampusGigs</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="Home Page.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../backend/controllers/profile.php">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../../backend/job_feed.php">Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../backend/controllers/logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Job Feed Section -->
+    <div class="job-feed-container">
+        <button class="post-job-btn" data-bs-toggle="modal" data-bs-target="#postJobModal">Post a Job</button>
+
+        <div id="jobFeed">
+            <?php
+            $conn = new mysqli("localhost", "root", "", "campusgigs");
+            $sql = "SELECT * FROM jobs ORDER BY created_at DESC";
+            $result = $conn->query($sql);
+
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "
+                    <div class='job-card'>
+                        <h5>" . htmlspecialchars($row['category']) . " - $" . htmlspecialchars($row['budget']) . "</h5>
+                        <p><strong>Deadline:</strong> " . htmlspecialchars($row['deadline']) . "</p>
+                        <p>" . htmlspecialchars($row['description']) . "</p>
+                        <div class='budget'>$" . htmlspecialchars($row['budget']) . "</div>
+                        <a href='../../backend/job_feed.php' class='btn btn-apply mt-2'>Apply via Job Feed</a>
+                    </div>";
+                }
+            } else {
+                echo "<p>No jobs available at the moment.</p>";
+            }
+            $conn->close();
+            ?>
+        </div>
+    </div>
+
+    <!-- Modal for Posting Jobs -->
+    <div class="modal fade" id="postJobModal" tabindex="-1" aria-labelledby="postJobModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="postJobModalLabel">Post a Job</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="../../backend/postJob.php" method="POST">
+                        <label for="category">Select Job Category</label>
+                        <select id="category" name="category" class="form-select" required>
+                            <option value="assignment">Assignment & Research Help</option>
+                            <option value="graphic_design">Graphic Design & Poster Making</option>
+                            <option value="photography">Photography & Videography</option>
+                            <option value="marketing">Marketing & Social Media</option>
+                            <option value="event_planning">Event Planning & Decoration</option>
+                            <option value="coding">Tech & Coding Support</option>
+                        </select>
+
+                        <label for="budget" class="mt-2">Budget</label>
+                        <input type="number" id="budget" name="budget" class="form-control" placeholder="Enter Budget" required>
+
+                        <label for="deadline" class="mt-2">Deadline</label>
+                        <input type="date" id="deadline" name="deadline" class="form-control" required>
+
+                        <label for="time" class="mt-2">Time</label>
+                        <input type="time" id="time" name="time" class="form-control" required>
+
+                        <label for="description" class="mt-2">Job Description</label>
+                        <textarea id="description" name="description" class="form-control" placeholder="Provide more details about the job" rows="5" required></textarea>
+
+                        <button type="submit" class="btn btn-success mt-3 w-100">Post Job</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
