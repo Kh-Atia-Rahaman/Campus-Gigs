@@ -12,3 +12,6 @@ if ($conn->connect_error) {
 ?>
 
 // DB parameters standardized
+
+// Initial db structure setup
+
