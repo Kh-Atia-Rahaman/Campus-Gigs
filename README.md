@@ -1,4 +1,4 @@
-﻿# Campus-Gigs
+# Campus-Gigs
 
 A platform for campus gigs, job postings, and student applications.
 
@@ -27,4 +27,9 @@ Verified and published.
 ## Verified Status
 All bug fixes applied and verified.
 
-<!-- Contribution graph sync trigger -->
+## Quick Start & Setup
+1. Clone this repository.
+2. Edit database parameters in `backend/config/db.php`.
+3. Set up the SQL tables by executing `database.sql`.
+
+<!-- Contribution graph sync trigger - Updated March 11, 2026 -->
