@@ -22,6 +22,3 @@ header('Content-Type: application/json');
 echo json_encode($jobs);
 $conn->close();
 ?>
-
-// Initial fetch jobs script
-
