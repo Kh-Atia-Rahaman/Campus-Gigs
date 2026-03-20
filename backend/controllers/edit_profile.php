@@ -94,6 +94,3 @@ $user = $result->fetch_assoc();
     </div>
 </body>
 </html>
-
-// Base profile editor
-
