@@ -29,6 +29,3 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 ?>
-
-// Base apply script
-
