@@ -1,3 +1,19 @@
+/* Global Design System Variables */
+:root {
+    --primary: #4f46e5;       /* Indigo */
+    --primary-hover: #4338ca;
+    --secondary: #06b6d4;     /* Cyan */
+    --background: #f8fafc;    /* Soft Slate */
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(255, 255, 255, 0.4);
+    --text-main: #0f172a;     /* Dark Slate */
+    --text-muted: #64748b;
+    --radius: 16px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+}
+
 /* Global Styles */
 body {
     font-family: 'Poppins', sans-serif;
