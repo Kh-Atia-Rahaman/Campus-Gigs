@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 /* Global Design System Variables */
 :root {
     --primary: #4f46e5;       /* Indigo */
@@ -16,7 +17,7 @@
 
 /* Global Styles */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Outfit', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f7fc; /* Lighter background */
