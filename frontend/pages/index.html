@@ -143,7 +143,7 @@
             padding: 25px 0;
             margin-top: 50px;
         }
-        .more-categories { display: none; }
+        .more-categories { display: none; opacity: 0; transition: opacity 0.3s ease; }
         .category-link { text-decoration: none; color: inherit; }
     </style>
     <link rel="stylesheet" href="../../backend/style.css">
@@ -294,7 +294,13 @@
             const moreCategories = document.querySelectorAll('.more-categories');
             const seeMoreButton = document.getElementById('see-more');
             moreCategories.forEach(category => {
-                category.style.display = category.style.display === 'block' ? 'none' : 'block';
+                if (category.style.display === 'block') {
+                    category.style.opacity = 0;
+                    setTimeout(() => category.style.display = 'none', 300);
+                } else {
+                    category.style.display = 'block';
+                    setTimeout(() => category.style.opacity = 1, 10);
+                }
             });
             seeMoreButton.textContent = seeMoreButton.textContent === 'See More' ? 'See Less' : 'See More';
         }
