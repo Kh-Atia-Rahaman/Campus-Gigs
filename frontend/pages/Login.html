@@ -56,11 +56,16 @@
 
         .btn-primary {
             width: 100%;
-            padding: 14px;
-            font-size: 1.3rem;
-            border-radius: 30px;
-            background: #007bff;
+            padding: 12px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-hover));
             border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
         }
 
         .footer {
