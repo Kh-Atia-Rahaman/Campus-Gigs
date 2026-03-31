@@ -63,12 +63,14 @@ $conn->close();
         }
 
         .job-feed-container {
-            max-width: 1100px;
-            margin: 50px auto;
+            max-width: 1000px;
+            margin: 80px auto;
             padding: 40px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
         }
 
         .job-card {
@@ -99,6 +101,7 @@ $conn->close();
             margin-bottom: 30px;
         }
     </style>
+    <link rel="stylesheet" href="../../backend/style.css">
 </head>
 <body>
 
