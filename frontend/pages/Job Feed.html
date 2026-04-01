@@ -98,13 +98,18 @@ $conn->close();
 
         .post-job-btn {
             display: inline-block;
-            padding: 12px 20px;
-            background-color: #28a745;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #10b981, #059669);
             color: white;
+            border: none;
             border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-weight: 500;
             margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        .post-job-btn:hover {
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
         }
     </style>
     <link rel="stylesheet" href="../../backend/style.css">
