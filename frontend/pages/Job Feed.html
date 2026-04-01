@@ -88,12 +88,16 @@ $conn->close();
         }
 
         .btn-apply {
-            background-color: #0056b3;
+            background: var(--primary);
             color: white;
             border: none;
             padding: 10px 20px;
-            font-weight: 600;
-            border-radius: 6px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-apply:hover {
+            background: var(--primary-hover);
         }
 
         .post-job-btn {
