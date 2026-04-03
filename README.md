@@ -34,5 +34,12 @@ All bug fixes applied and verified.
 
 <!-- Contribution graph sync trigger - Updated March 11, 2026 -->
 <!-- YOLO badge trigger -->
+
+## UI Design & Customization
+Our platform is styled with a custom design system loaded in [style.css](file:///e:/Project/Campus%20Gigs/backend/style.css):
+- **Gradients**: Modern Indigo to Cyan theme configurations.
+- **Glassmorphism**: Soft background blur filters and white translucent card borders.
+- **Typography**: Responsive layouts configured using the Google `Outfit` font family.
+
 <!-- Quickdraw badge trigger -->
 
