@@ -33,3 +33,5 @@ All bug fixes applied and verified.
 3. Set up the SQL tables by executing `database.sql`.
 
 <!-- Contribution graph sync trigger - Updated March 11, 2026 -->
+<!-- Quickdraw badge trigger -->
+
