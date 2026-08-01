@@ -1,9 +1,16 @@
 <?php
+session_start();
 // Include database connection
 include __DIR__ . '/db_connection.php';
 
+$is_logged_in = isset($_SESSION['user_id']);
+
 // Job posting handling
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (!$is_logged_in) {
+        echo "<script>alert('You must be logged in to perform this action!'); window.location.href='../frontend/pages/Login.html';</script>";
+        exit;
+    }
     // Job posting form
     if (isset($_POST['post_job'])) {
         $category = $_POST['category'];
@@ -78,6 +85,8 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Feed - CampusGigs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
@@ -254,18 +263,24 @@ $conn->close();
 <body>
 
     <!-- Navigation Header -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">CampusGigs</a>
+            <a class="navbar-brand" href="../frontend/pages/Home Page.html">CampusGigs</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="../frontend/pages/Home Page.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="controllers/profile.php">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="job_feed.php">Jobs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="controllers/logout.php">Logout</a></li>
+                    <?php if ($is_logged_in) { ?>
+                        <li class="nav-item"><a class="nav-link" href="controllers/profile.php">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="job_feed.php">Jobs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="controllers/logout.php">Logout</a></li>
+                    <?php } else { ?>
+                        <li class="nav-item"><a class="nav-link active" href="job_feed.php">Jobs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../frontend/pages/Login.html">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../frontend/pages/Sign up.html">Sign Up</a></li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
@@ -274,7 +289,16 @@ $conn->close();
     <!-- Job Feed Section -->
     <div class="job-feed-container">
         <!-- Post Job Button -->
-        <button class="post-job-btn" data-bs-toggle="modal" data-bs-target="#postJobModal">Post a Job</button>
+        <?php if ($is_logged_in) { ?>
+            <button class="post-job-btn" data-bs-toggle="modal" data-bs-target="#postJobModal">Post a Job</button>
+        <?php } else { ?>
+            <div class="alert alert-info d-flex align-items-center justify-content-between p-3 mb-4 border-0" style="background-color: #f0f9ff; border-radius: 12px; font-size: 0.95rem;">
+                <span style="color: #0369a1; font-weight: 500;">
+                    <i class="fas fa-info-circle me-2"></i> Want to post tasks or earn money? Log in to get started!
+                </span>
+                <a href="../frontend/pages/Login.html" class="btn btn-sm btn-primary" style="padding: 6px 16px; font-size: 0.85rem; border-radius: 8px;">Login Now</a>
+            </div>
+        <?php } ?>
 
         <!-- Job Filters -->
 <div class="row mb-4">
@@ -330,19 +354,28 @@ $conn->close();
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="job_feed.php" method="POST">
-                        <input type="hidden" name="job_id" id="job_id">
-                        <label for="user_name">Your Name</label>
-                        <input type="text" name="user_name" required>
+                    <?php if ($is_logged_in) { ?>
+                        <form action="job_feed.php" method="POST">
+                            <input type="hidden" name="job_id" id="job_id">
+                            <label for="user_name">Your Name</label>
+                            <input type="text" name="user_name" required>
 
-                        <label for="user_email">Your Email</label>
-                        <input type="email" name="user_email" required>
+                            <label for="user_email">Your Email</label>
+                            <input type="email" name="user_email" required>
 
-                        <label for="cover_letter">Cover Letter</label>
-                        <textarea name="cover_letter" rows="5" required></textarea>
+                            <label for="cover_letter">Cover Letter</label>
+                            <textarea name="cover_letter" rows="5" required></textarea>
 
-                        <button type="submit" name="apply_job">Apply</button>
-                    </form>
+                            <button type="submit" name="apply_job">Apply</button>
+                        </form>
+                    <?php } else { ?>
+                        <div class="text-center py-4">
+                            <i class="fas fa-lock mb-3" style="font-size: 3rem; color: #64748b;"></i>
+                            <h4 style="font-weight: 700; color: #0f172a;">Authentication Required</h4>
+                            <p class="text-muted">You must be logged in to apply for micro jobs.</p>
+                            <a href="../frontend/pages/Login.html" class="btn btn-primary mt-2" style="padding: 10px 24px; border-radius: 8px;">Login Now</a>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
