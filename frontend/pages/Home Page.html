@@ -42,12 +42,11 @@
       height: 520px;
       color: white;
       text-align: center;
-      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-      background-image: radial-gradient(rgba(99, 102, 241, 0.15) 1px, transparent 0);
-      background-size: 24px 24px;
+      background: #0f172a;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
     .hero-carousel {
       position: absolute;
@@ -56,8 +55,9 @@
       overflow: hidden;
       top: 0;
       left: 0;
-      opacity: 0.15;
+      opacity: 0.35;
       pointer-events: none;
+      z-index: 0;
     }
     .hero-carousel img {
       width: 100%;
@@ -72,6 +72,15 @@
     .hero-carousel img.active {
       opacity: 1;
     }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.85) 0%, rgba(2, 6, 23, 0.95) 100%);
+      z-index: 1;
+    }
     .hero-text {
       position: relative;
       z-index: 2;
@@ -84,17 +93,19 @@
       font-size: 3.5rem;
       font-weight: 800;
       letter-spacing: -1.5px;
-      background: linear-gradient(to right, #ffffff, #c7d2fe);
+      background: linear-gradient(to right, #ffffff, #cbd5e1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 20px;
       line-height: 1.2;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     .hero-text p {
       font-size: 1.25rem;
       margin-bottom: 35px;
       color: #94a3b8;
       font-weight: 400;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
     .carousel-arrow {
       position: absolute;
@@ -157,12 +168,30 @@
       border-color: #6366f1;
     }
     .category-icon {
-      font-size: 2.75rem;
-      margin-bottom: 20px;
-      display: inline-block;
-      background: linear-gradient(135deg, #6366f1, #06b6d4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #f0fdf4; /* Default soft highlight color */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 1.75rem;
+      color: #10b981;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    /* Specific soft pastel backdrops for modern aesthetics */
+    .col-md-4:nth-child(1) .category-icon { background: #eff6ff; color: #3b82f6; } /* Assignment: Blue */
+    .col-md-4:nth-child(2) .category-icon { background: #fdf2f8; color: #ec4899; } /* Graphic Design: Pink */
+    .col-md-4:nth-child(3) .category-icon { background: #f5f3ff; color: #8b5cf6; } /* Photo: Purple */
+    .col-md-4:nth-child(4) .category-icon { background: #fff7ed; color: #f97316; } /* Marketing: Orange */
+    .col-md-4:nth-child(5) .category-icon { background: #ecfdf5; color: #10b981; } /* Event: Green */
+    .col-md-4:nth-child(6) .category-icon { background: #fff1f2; color: #f43f5e; } /* Tech: Red */
+
+    .category-card:hover .category-icon {
+      background: #6366f1 !important;
+      color: #ffffff !important;
+      transform: scale(1.05);
     }
     .category-card h3 {
       font-size: 1.15rem;
@@ -187,7 +216,7 @@
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="Home Page.html">CampusGigs</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -213,6 +242,7 @@
       <img src="../images/diu 3.jpg" alt="Image 3">
       <img src="../images/diu 4.jpg" alt="Image 4">
     </div>
+    <div class="hero-overlay"></div>
     <div class="hero-text">
       <h1>Find & Offer Micro Jobs on Campus</h1>
       <p>Turn your skills into income by helping fellow students with tasks.</p>
