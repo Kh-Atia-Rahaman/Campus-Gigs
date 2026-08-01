@@ -78,142 +78,176 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Feed - CampusGigs</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f7f9fc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
             margin: 0;
             padding: 0;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Navbar Styles */
         .navbar {
-            background: linear-gradient(90deg, #003366, #0056b3);
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: rgba(15, 23, 42, 0.95) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 18px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
         }
 
         .navbar-brand {
-            font-weight: 600;
-            color: white;
-            font-size: 1.8rem;
+            font-weight: 800;
+            color: white !important;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
         }
 
         .navbar-nav .nav-link {
-            font-weight: 500;
-            color: white !important;
-            font-size: 1.1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-size: 0.95rem;
+            padding: 8px 16px !important;
+            transition: all 0.2s ease;
         }
-
         .navbar-nav .nav-link:hover {
-            color: #f8f9fa !important;
-            background-color: transparent;
-            border-bottom: 3px solid #f8f9fa;
+            color: #ffffff !important;
+            transform: translateY(-1px);
         }
 
         /* Job Feed Container */
         .job-feed-container {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 50px auto;
-            padding: 40px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            padding: 45px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
         }
 
         .job-card {
-            background: #f9f9f9;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.02);
             margin-bottom: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .job-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.03);
+            border-color: #6366f1;
         }
 
         .job-card h5 {
-            color: #003366;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 15px;
+            color: #0f172a;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
         }
 
         .job-card p {
-            font-size: 1rem;
-            color: #555;
+            font-size: 0.95rem;
+            color: #475569;
             margin-bottom: 15px;
         }
 
         .job-card .budget {
-            color: #27ae60;
-            font-weight: bold;
-            font-size: 1.2rem;
+            color: #10b981;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
         }
 
         .btn-apply {
-            background-color: #0056b3;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 24px;
             font-weight: 600;
-            border-radius: 6px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+        }
+        .btn-apply:hover {
+            background: linear-gradient(135deg, #4f46e5, #4338ca);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+            transform: translateY(-1px);
         }
 
         /* Modal for Posting Jobs */
         .post-job-btn {
             display: inline-block;
-            padding: 12px 20px;
-            background-color: #28a745;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
             margin-bottom: 30px;
-            transition: background-color 0.3s ease;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
         }
-
         .post-job-btn:hover {
-            background-color: #218838;
+            background: linear-gradient(135deg, #059669, #047857);
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+            transform: translateY(-1px);
         }
 
         /* Custom form input styles */
         .modal-body label {
             font-weight: 600;
             margin-top: 10px;
+            color: #475569;
+            font-size: 0.9rem;
         }
 
         .modal-body input, .modal-body select, .modal-body textarea {
             width: 100%;
-            padding: 8px 12px;
+            padding: 10px 14px;
             margin-bottom: 15px;
             border-radius: 8px;
-            border: 1px solid #ddd;
+            border: 1px solid #cbd5e1;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .modal-body input:focus, .modal-body select:focus, .modal-body textarea:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            outline: none;
         }
 
         .modal-body button {
             width: 100%;
             padding: 12px;
-            background-color: #28a745;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
             border: none;
             color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
+            box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+            transition: all 0.2s ease;
         }
 
         .modal-body button:hover {
-            background-color: #218838;
+            background: linear-gradient(135deg, #4f46e5, #4338ca);
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
         }
 
         .pagination {
             justify-content: center;
+            gap: 8px;
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -228,11 +262,10 @@ $conn->close();
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="#">Jobs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Messages</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../frontend/pages/Home Page.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="controllers/profile.php">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="job_feed.php">Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="controllers/logout.php">Logout</a></li>
                 </ul>
             </div>
         </div>
