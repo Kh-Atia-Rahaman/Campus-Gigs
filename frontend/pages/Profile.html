@@ -9,8 +9,8 @@
         /* Custom Glassmorphic Profile Card Design */
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f1f5f9;
-            color: #333;
+            background-color: #f8fafc;
+            color: #1e293b;
             margin: 0;
             padding: 0;
             display: flex;
@@ -37,10 +37,11 @@
         .profile-container {
             max-width: 900px;
             margin: 50px auto;
-            padding: 30px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 45px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
             flex-grow: 1;
         }
 
@@ -65,34 +66,37 @@
         }
 
         .btn-edit {
-            padding: 10px 20px;
-            background-color: #007bff;
+            padding: 10px 24px;
+            background-color: #0056b3;
             border: none;
             color: white;
-            border-radius: 30px;
+            border-radius: 20px;
             font-size: 1rem;
             text-decoration: none;
+            transition: all 0.2s ease;
         }
 
         .btn-edit:hover {
-            background-color: #0056b3;
+            background-color: #004085;
             color: white;
+            box-shadow: 0 4px 8px rgba(0, 86, 179, 0.2);
         }
 
         .stats-container {
             display: flex;
             justify-content: space-between;
             margin-bottom: 30px;
+            gap: 15px;
         }
 
         .stat-box {
             flex: 1;
             text-align: center;
-            background-color: #f1f5f9;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 0 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .skills-container {
@@ -102,22 +106,24 @@
         }
 
         .skill-badge {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 1rem;
+            background-color: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
         }
 
         .footer {
-            background: linear-gradient(90deg, #00274d, #0056b3);
-            color: white;
+            background: #0f172a;
+            color: #94a3b8;
             text-align: center;
-            padding: 25px 0;
+            padding: 30px 0;
             margin-top: auto;
+            border-top: 1px solid #1e293b;
         }
     </style>
-    <link rel="stylesheet" href="../../backend/style.css">
 </head>
 <body>
 

@@ -8,8 +8,8 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #f4f7fc;
-      color: #333;
+      background-color: #f8fafc;
+      color: #1e293b;
     }
     .navbar {
       background: linear-gradient(90deg, #00274d, #0056b3);
@@ -32,7 +32,10 @@
       height: 500px;
       color: white;
       text-align: center;
-      background-color: rgba(0, 0, 0, 0.7);
+      background: linear-gradient(rgba(0, 39, 77, 0.85), rgba(0, 86, 179, 0.85));
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .hero-carousel {
       position: relative;
@@ -52,69 +55,90 @@
     }
     .hero-carousel img.active {
       opacity: 1;
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
     .hero-text {
       position: absolute;
-      top: 40%;
+      top: 35%;
       left: 50%;
       transform: translateX(-50%);
       z-index: 2;
       width: 100%;
     }
     .hero-text h1 {
-      font-size: 3.5rem;
-      font-weight: bold;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
     }
     .hero-text p {
-      font-size: 1.4rem;
-      margin-bottom: 20px;
+      font-size: 1.25rem;
+      margin-bottom: 25px;
+      opacity: 0.9;
     }
     .carousel-arrow {
       position: absolute;
       top: 50%;
-      font-size: 3rem;
+      transform: translateY(-50%);
+      font-size: 1.75rem;
       color: white;
       z-index: 3;
       cursor: pointer;
-      padding: 10px;
-      background-color: rgba(0, 0, 0, 0.5);
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.4);
       border-radius: 50%;
+      transition: background-color 0.2s ease;
     }
-    .carousel-arrow-left { left: 10px; }
-    .carousel-arrow-right { right: 10px; }
+    .carousel-arrow:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    .carousel-arrow-left { left: 15px; }
+    .carousel-arrow-right { right: 15px; }
     .btn-primary {
-      padding: 14px 40px;
-      font-size: 1.3rem;
-      border-radius: 30px;
-      background: #007bff;
+      padding: 12px 35px;
+      font-size: 1.1rem;
+      border-radius: 25px;
+      background: #0056b3;
       border: none;
+      box-shadow: 0 4px 6px rgba(0, 86, 179, 0.2);
+      transition: all 0.2s ease;
     }
-    .categories-section { padding: 80px 0; }
+    .btn-primary:hover {
+      background-color: #004085;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 12px rgba(0, 86, 179, 0.3);
+    }
+    .categories-section { padding: 60px 0; }
     .category-card {
       padding: 30px;
       border-radius: 12px;
       background: #ffffff;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s ease-in-out;
       text-align: center;
       cursor: pointer;
     }
     .category-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+      border-color: #cbd5e1;
     }
     .category-icon {
-      font-size: 3.5rem;
+      font-size: 3rem;
       margin-bottom: 15px;
-      color: #007bff;
+      display: inline-block;
     }
     .footer {
-      background: linear-gradient(90deg, #00274d, #0056b3);
-      color: white;
+      background: #0f172a;
+      color: #94a3b8;
       text-align: center;
-      padding: 25px 0;
-      margin-top: 50px;
+      padding: 30px 0;
+      margin-top: 60px;
+      border-top: 1px solid #1e293b;
     }
     .more-categories { display: none; }
   </style>
