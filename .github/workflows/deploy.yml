@@ -20,7 +20,7 @@ jobs:
         username: if0_42555672
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./
-        server-dir: /htdocs/
+        server-dir: /campusgigs.freedev.app/htdocs/
         exclude: |
           **/.git*
           **/.git*/**
