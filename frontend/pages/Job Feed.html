@@ -126,7 +126,7 @@ $conn->close();
 
         <div id="jobFeed">
             <?php
-            $conn = new mysqli("localhost", "root", "", "campusgigs");
+            include __DIR__ . '/../../backend/config/db.php';
             $sql = "SELECT * FROM jobs ORDER BY created_at DESC";
             $result = $conn->query($sql);
 
